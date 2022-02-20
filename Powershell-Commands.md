@@ -395,3 +395,13 @@ Find-Module *ntfs*
 ```powershell
 Install-Module ModuleName
 ```
+
+## Push Remote GPupdate on full OU/CN
+```powershell
+PS C:\> Invoke-GPUpdate -Computer "CONTOSO\COMPUTER-02" -Target "User"
+
+Get-ADComputer –filter * -Searchbase "cn=computers, dc=Contoso,dc=com" | foreach{ Invoke-GPUpdate –computer $_.name -force}
+
+Get-ADComputer –filter * -Searchbase "ou=Accounting, dc=Contoso,dc=com" | foreach{ Invoke-GPUpdate –computer $_.name -force}
+
+```
