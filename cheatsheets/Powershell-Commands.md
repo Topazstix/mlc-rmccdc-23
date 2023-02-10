@@ -7,13 +7,17 @@
 Get-Command -Module ActiveDirectory
 ```
 
+##Disable SMB
+'''powershell
+Disable-WindowsOptionalFeature -Online -FeatureNameSMB1Protocol
+'''
+
 ## Display basic domain information
 ```powershell
 Get-ADDomain
 ```
 
 ## Get all domain controllers by hostname and operating system
-
 ```powershell
 Get-ADDomainController -filter * | select hostname,operatingsystem
 ```
@@ -121,6 +125,11 @@ Move-ADObject -Identity "CN=Test User (0001),OU=ADPRO Users,DC=ad,DC=activedirec
 ```powershell
 # Specify target OU. $TargetOU = "OU=HR,OU=ADPRO Users,DC=ad,DC=activedirectorypro,DC=com" # Read user sAMAccountNames from csv file (field labeled "Name"). Import-Csv -Path Users.csv | ForEach-Object { # Retrieve DN of User. $UserDN = (Get-ADUser -Identity $_.Name).distinguishedName # Move user to target OU. Move-ADObject -Identity $UserDN -TargetPath $TargetOU }
 ```
+
+###view an active session with a machine
+'''powershell
+net session
+'''
 
 ---
 
